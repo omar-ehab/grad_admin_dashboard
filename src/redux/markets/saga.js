@@ -1,7 +1,7 @@
-import { all, takeEvery, put, fork} from 'redux-saga/effects';
+import { all, takeEvery, put, fork, select} from 'redux-saga/effects';
 import jwtConfig from '@iso/config/jwt.config';
 import actions from './actions';
-// import SuperFetch from '../../library/helpers/superFetch';
+import SuperFetch from '../../library/helpers/superFetch';
 
 
 export function* getAllMarketsRequest() {
@@ -39,9 +39,80 @@ export function* getAllMarketsRequest() {
   });
 }
 
+export function* storeMarketRequest() {
+
+  yield takeEvery('STORE_NEW_MARKET_REQUEST', function*() {
+    try {
+      const { markets } = yield select();
+      const payload = markets.selected_market
+      payload.createdBy = localStorage.getItem('admin_dashboard_id');
+      const res = yield SuperFetch.post('markets', payload)
+
+      if(res.success === true) {
+        yield put({
+          type: actions.STORE_NEW_MARKET_SUCCESS,
+          payload: { market: res.market }
+        });
+        yield put({
+          type: actions.CLOSE_INSERT_MARKET_MODAL
+        });
+      } else {
+        yield put({
+          type: actions.STORE_NEW_MARKET_ERROR,
+          payload: {error: res.error}
+        });
+      }
+    
+    } catch(err) {
+      yield put({
+        type: actions.STORE_NEW_MARKET_ERROR,
+        payload: {error: "Please Connect to Internet"}
+      });
+    }
+  });
+}
+
+export function* editMarketRequest() {
+
+  yield takeEvery('EDIT_MARKET_REQUEST', function*() {
+    try {
+      const { markets } = yield select();
+      const payload = {
+        name: markets.selected_market.market_name
+      };
+      const market_id = markets.selected_market_id;
+      const res = yield SuperFetch.put(`markets/${market_id}/update`, payload)
+
+
+      if(res.success === true) {
+        yield put({
+          type: actions.EDIT_MARKET_SUCCESS,
+          payload: { market: res.market }
+        });
+        yield put({
+          type: actions.CLOSE_EDIT_MARKET_MODAL
+        });
+      } else {
+        yield put({
+          type: actions.EDIT_MARKET_ERROR,
+          payload: {error: res.error}
+        });
+      }
+    
+    } catch(err) {
+      yield put({
+        type: actions.EDIT_MARKET_ERROR,
+        payload: {error: "Please Connect to Internet"}
+      });
+    }
+  });
+}
+
 
 export default function* rootSaga() {
   yield all([
-    fork(getAllMarketsRequest)
+    fork(getAllMarketsRequest),
+    fork(storeMarketRequest),
+    fork(editMarketRequest)
   ]);
 }

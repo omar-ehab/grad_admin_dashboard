@@ -12,14 +12,15 @@ const routes = [
     path: 'students/:student_id',
     component: lazy(() => import('@iso/containers/Student/Student')),
   },
-  // {
-  //   path: 'markets',
-  //   component: lazy(() => import('@iso/containers/Markets/AntTables/AntTables')),
-  // },
-  // {
-  //   path: 'markets/:market_id',
-  //   component: lazy(() => import('@iso/containers/Markets/AntTables/AntTables')),
-  // },
+  {
+    path: 'markets',
+    exact: true,
+    component: lazy(() => import('@iso/containers/Markets/AntTables/AntTables')),
+  },
+  {
+    path: 'markets/:market_id',
+    component: lazy(() => import('@iso/containers/Market/Market')),
+  },
   
 ];
 

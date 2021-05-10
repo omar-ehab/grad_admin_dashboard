@@ -2,7 +2,7 @@ import React from 'react';
 import clone from 'clone';
 import TableWrapper from '../AntTables.styles';
 import IntlMessages from '@iso/components/utility/intlMessages';
-import { WithdrawMarketBalance } from '@iso/components/Tables/HelperCells';
+import { WithdrawMarketBalance, ShowMarketButton, EditMarketButton, DeleteMarketButton } from '@iso/components/Tables/HelperCells';
 
 export default function(props) {
 
@@ -19,15 +19,31 @@ export default function(props) {
       ),
     };
 
-    // const downloadExcelColumn = {
-    //   title: <IntlMessages id="attendance_sheet" />,
-    //   dataIndex: 'download_excel',
-    //   render: (text, record, index) => (
-    //     <DownloadExcel lecture_id={record} />
-    //   ),
-    // };
+    const show_market = {
+      title: <IntlMessages id="show_market" />,
+      dataIndex: 'show_market',
+      render: (text, record, index) => (
+        <ShowMarketButton market={record} />
+      ),
+    };
+
+    const actions = {
+      title: <IntlMessages id="actions" />,
+      dataIndex: 'markets_actions',
+      render: (text, record, index) => (
+        <>
+          <EditMarketButton market={record} />
+          <DeleteMarketButton market={record} />
+        </>
+      ),
+    };
+
+
+
+
     columns.push(withdraw_market_balance);
-    // columns.push(downloadExcelColumn);
+    columns.push(show_market);
+    columns.push(actions);
 
     return columns;
   }
