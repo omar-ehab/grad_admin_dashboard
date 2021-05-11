@@ -6,6 +6,8 @@ import DeleteStudentButton from './DeleteStudentButton';
 import ShowMarketButton from './ShowMarketButton';
 import EditMarketButton from './EditMarketButton';
 import DeleteMarketButton from './DeleteMarketButton';
+import DeleteStaffButton from './DeleteStaffButton';
+import EditStaffButton from './EditStaffButton';
 
 const DateCell = data => <p>{data.toLocaleString()}</p>;
 const LinkCell = (link, href) => <a href={href ? href : '#'}>{link}</a>;
@@ -22,4 +24,6 @@ export {
   ShowMarketButton,
   EditMarketButton,
   DeleteMarketButton,
+  DeleteStaffButton,
+  EditStaffButton,
 };

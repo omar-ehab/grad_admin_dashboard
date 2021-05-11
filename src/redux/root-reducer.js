@@ -7,6 +7,7 @@ import markets from '@iso/redux/markets/reducer';
 import market from '@iso/redux/market/reducer';
 import students from '@iso/redux/students/reducer';
 import student from '@iso/redux/student/reducer';
+import staff from '@iso/redux/staff/reducer';
 
 export default combineReducers({
   Auth,
@@ -17,4 +18,5 @@ export default combineReducers({
   market,
   students,
   student,
+  staff,
 });

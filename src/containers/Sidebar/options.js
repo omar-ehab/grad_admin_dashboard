@@ -9,5 +9,10 @@ const options = [
     label: 'sidebar.markets',
     leftIcon: 'ion-android-list',
   },
+  {
+    key: 'staff',
+    label: 'sidebar.staff',
+    leftIcon: 'ion-android-list',
+  },
 ];
 export default options;

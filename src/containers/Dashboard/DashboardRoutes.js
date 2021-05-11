@@ -21,6 +21,12 @@ const routes = [
     path: 'markets/:market_id',
     component: lazy(() => import('@iso/containers/Market/Market')),
   },
+
+  {
+    path: 'staff',
+    exact: true,
+    component: lazy(() => import('@iso/containers/Staff/AntTables/AntTables')),
+  },
   
 ];
 

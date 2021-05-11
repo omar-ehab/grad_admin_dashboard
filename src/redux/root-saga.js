@@ -4,6 +4,7 @@ import marketsSaga from '@iso/redux/markets/saga';
 import marketSaga from '@iso/redux/market/saga';
 import studentsSaga from '@iso/redux/students/saga';
 import studentSaga from '@iso/redux/student/saga';
+import staffSaga from '@iso/redux/staff/saga';
 
 export default function* rootSaga(getState) {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga(getState) {
     marketSaga(),
     studentsSaga(),
     studentSaga(),
+    staffSaga(),
   ]);
 }

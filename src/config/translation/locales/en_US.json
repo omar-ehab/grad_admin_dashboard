@@ -2,11 +2,16 @@
   "created_at": "Created At",
   "add_new_student": "Add New Student",
   "add_new_market": "Add New Market",
+  "add_new_staff": "Add New Staff",
   "edit_student": "Edit Student",
   "edit_market": "Edit Market",
+  "edit_staff": "Edit Staff",
+  "phone_number": "Phone Number",
+  "job_title": "Job Title",
   "card_id": "Card ID",
   "delete_student": "Delete Student",
   "delete_market": "Delete Market",
+  "delete_staff": "Delete Staff",
   "markets": "Markets",
   "withdraw_balance": "Withdraw Balance",
   "withdraw_market_balance": "Withdraw Market Balance",
@@ -23,8 +28,10 @@
   "actions": "Actions",
   "sidebar.markets": "Markets",
   "sidebar.students": "Students",
+  "sidebar.staff": "Staff Members",
   "topbar.logout": "Logout",
   "page.signInRememberMe": "Remember Me",
   "page.signInButton": "Sign In",
-  "page.signInTitle": "Sign In"
+  "page.signInTitle": "Sign In",
+  "staff": "Staff"
 }
