@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import LayoutContentWrapper from '@iso/components/utility/layoutWrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
-import Select, { SelectOption } from '@iso/components/uielements/select';
 import Modal from '@iso/components/Feedback/Modal';
 import Input from '@iso/components/uielements/input';
 import { Button } from 'antd';
@@ -11,15 +10,14 @@ import { tableInfo } from './configs';
 import * as TableViews from './TableViews/TableViews';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import { direction } from '@iso/lib/helpers/rtl';
-import staffActions from '@iso/redux/staff/actions';
+import doctorsActions from '@iso/redux/doctors/actions';
 import { Alert } from 'antd';
 import {
   Fieldset,
   Form,
   Label,
-} from './Staff.styles';
+} from './Doctors.styles';
 
-const Option = SelectOption;
 
 const margin = {
   margin: direction === 'rtl' ? '0 0 8px 8px' : '0 8px 8px 0',
@@ -31,52 +29,44 @@ export default function AntTable() {
   const dispatch = useDispatch();
 
   const openInsertModal = () => {
-    dispatch(staffActions.openInsertStaffModal());
+    dispatch(doctorsActions.openInsertDoctorModal());
   }
 
   const closeInsertModal = () => {
-    dispatch(staffActions.closeInsertStaffModal());
+    dispatch(doctorsActions.closeInsertDoctorModal());
   }
 
   const submitInsertForm = () => {
-    dispatch(staffActions.storeNewStaff());
+    dispatch(doctorsActions.storeNewDoctor());
   }
 
   const submitEditForm = () => {
-    dispatch(staffActions.editStaff());
+    dispatch(doctorsActions.editDoctor());
   }
 
   const closeEditModal = () => {
-    dispatch(staffActions.closeEditStaffModal());
+    dispatch(doctorsActions.closeEditDoctorModal());
   }
 
-  const handleSelectChange = (value) => {
-    const e = {
-      target: {
-        value
-      }
-    }
-    onRecordChange(e, "job_title")
-  }
 
   const onRecordChange = (e, key) => {
-    dispatch(staffActions.updateSelectedStaffForm(key, e.target.value));
+    dispatch(doctorsActions.updateSelectedDoctorForm(key, e.target.value));
   }
 
-  const { staff_memebers, selected_staff_member, insert_staff_modal, edit_staff_modal, error, insert_errors } = useSelector(state => {
+  const { doctors, selected_doctor, insert_doctor_modal, edit_doctor_modal, error, insert_errors } = useSelector(state => {
     return {
-      staff_memebers: state.staff.staff_members,
-      error: state.staff.error,
-      selected_staff_member: state.staff.selected_staff_member,
-      insert_staff_modal: state.staff.insert_staff_modal,
-      edit_staff_modal: state.staff.edit_staff_modal,
-      insert_errors: state.staff.insert_errors,
+      doctors: state.doctors.doctors,
+      error: state.doctors.error,
+      selected_doctor: state.doctors.selected_doctor,
+      insert_doctor_modal: state.doctors.insert_doctor_modal,
+      edit_doctor_modal: state.doctors.edit_doctor_modal,
+      insert_errors: state.doctors.insert_errors,
     }
   });
 
   useEffect(() => {
 
-    dispatch(staffActions.fetchStaffMembers());
+    dispatch(doctorsActions.fetchDoctors());
   }, [dispatch]);
 
   function renderTable(tableInfo, data) {
@@ -88,7 +78,7 @@ export default function AntTable() {
     <LayoutContentWrapper>
       <Row>
         <Col span={24}>
-          <h2>EMPLOYEES</h2>
+          <h2>STAFF MEMBERS</h2>
         </Col>
         <Col span={24}>
           <Button type="primary" style={margin} onClick={openInsertModal}>
@@ -104,7 +94,7 @@ export default function AntTable() {
         </Row>
       : "" }
       <Modal
-            visible={edit_staff_modal}
+            visible={edit_doctor_modal}
             onClose={closeEditModal}
             title="Edit Staff Data"
             onCancel={closeEditModal}
@@ -118,7 +108,7 @@ export default function AntTable() {
                 <Input
                   label="Name"
                   placeholder="Enter name"
-                  value={selected_staff_member.name}
+                  value={selected_doctor.name}
                   onChange={e => onRecordChange(e, 'name')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "name" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
@@ -128,7 +118,7 @@ export default function AntTable() {
                 <Input
                   label="Email"
                   placeholder="Enter email"
-                  value={selected_staff_member.email}
+                  value={selected_doctor.email}
                   onChange={e => onRecordChange(e, 'email')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "email" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
@@ -138,23 +128,15 @@ export default function AntTable() {
                 <Input
                   label="phone number"
                   placeholder="Enter phone number"
-                  value={selected_staff_member.phone_number}
+                  value={selected_doctor.phone_number}
                   onChange={e => onRecordChange(e, 'phone_number')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "phone_number" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
               </Fieldset>
-              <Fieldset>
-                <Label>Role</Label>
-                <Select defaultValue={selected_staff_member.job_title} onChange={handleSelectChange}>
-                  <Option value="Admin">ADMIN</Option>
-                  <Option value="Accountant" >ACCOUNTANT</Option>
-                </Select>
-                { insert_errors.details ? (insert_errors.details[0]?.context?.key === "job_title" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
-              </Fieldset>
             </Form>
       </Modal>
       <Modal
-            visible={insert_staff_modal}
+            visible={insert_doctor_modal}
             onClose={closeInsertModal}
             title="Add new Staff Member"
             onCancel={closeInsertModal}
@@ -168,7 +150,7 @@ export default function AntTable() {
                 <Input
                   label="Name"
                   placeholder="Enter name"
-                  value={selected_staff_member.name}
+                  value={selected_doctor.name}
                   onChange={e => onRecordChange(e, 'name')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "name" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
@@ -178,7 +160,7 @@ export default function AntTable() {
                 <Input
                   label="Email"
                   placeholder="Enter email"
-                  value={selected_staff_member.email}
+                  value={selected_doctor.email}
                   onChange={e => onRecordChange(e, 'email')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "email" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
@@ -189,7 +171,7 @@ export default function AntTable() {
                   label="Password"
                   placeholder="Enter password"
                   type="password"
-                  value={selected_staff_member.password}
+                  value={selected_doctor.password}
                   onChange={e => onRecordChange(e, 'password')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "password" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
@@ -199,24 +181,16 @@ export default function AntTable() {
                 <Input
                   label="phone number"
                   placeholder="Enter phone number"
-                  value={selected_staff_member.phone_number}
+                  value={selected_doctor.phone_number}
                   onChange={e => onRecordChange(e, 'phone_number')}
                 />
                 { insert_errors.details ? (insert_errors.details[0]?.context?.key === "phone_number" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
-              </Fieldset>
-              <Fieldset>
-                <Label>Job Title</Label>
-                <Select defaultValue={selected_staff_member.job_title} onChange={handleSelectChange}>
-                  <Option value="Admin">ADMIN</Option>
-                  <Option value="Accountant" >ACCOUNTANT</Option>
-                </Select>
-                { insert_errors.details ? (insert_errors.details[0]?.context?.key === "job_title" ? <Alert message={insert_errors.details[0].message} type="error" style={{marginTop: 10}}/> : "") : "" }
               </Fieldset>
 
             </Form>
       </Modal>
       <TableDemoStyle className="isoLayoutContent">
-        {renderTable(tableInfo, staff_memebers)}
+        {renderTable(tableInfo, doctors)}
       </TableDemoStyle>
     </LayoutContentWrapper>
   );

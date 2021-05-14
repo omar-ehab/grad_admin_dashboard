@@ -14,5 +14,10 @@ const options = [
     label: 'sidebar.staff',
     leftIcon: 'ion-android-list',
   },
+  {
+    key: 'doctors',
+    label: 'sidebar.doctors',
+    leftIcon: 'ion-android-list',
+  },
 ];
 export default options;
