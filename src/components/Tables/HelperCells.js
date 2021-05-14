@@ -10,6 +10,7 @@ import DeleteStaffButton from './DeleteStaffButton';
 import DeleteDoctorButton from './DeleteDoctorButton';
 import EditStaffButton from './EditStaffButton';
 import EditDoctorButton from './EditDoctorButton';
+import DownloadLabAccessExcel from './DownloadLabAccessExcel';
 
 const DateCell = data => <p>{data.toLocaleString()}</p>;
 const LinkCell = (link, href) => <a href={href ? href : '#'}>{link}</a>;
@@ -30,4 +31,5 @@ export {
   EditStaffButton,
   DeleteDoctorButton,
   EditDoctorButton,
+  DownloadLabAccessExcel
 };

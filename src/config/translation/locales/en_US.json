@@ -33,10 +33,14 @@
   "sidebar.students": "Students",
   "sidebar.staff": "Employees",
   "sidebar.doctors": "Staff Members",
+  "sidebar.labs": "Labs",
   "topbar.logout": "Logout",
   "page.signInRememberMe": "Remember Me",
   "page.signInButton": "Sign In",
   "page.signInTitle": "Sign In",
   "staff": "employee",
-  "doctor": "Staff"
+  "doctor": "Staff",
+  "lab_name": "Lab Name",
+  "download_entrance_sheet": "Download Entrance Sheet"
+  
 }

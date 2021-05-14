@@ -32,6 +32,12 @@ const routes = [
     exact: true,
     component: lazy(() => import('@iso/containers/Doctors/AntTables/AntTables')),
   },
+
+  {
+    path: 'labs',
+    exact: true,
+    component: lazy(() => import('@iso/containers/Labs/AntTables/AntTables')),
+  },
   
 ];
 

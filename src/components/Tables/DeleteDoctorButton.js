@@ -13,12 +13,12 @@ const margin = {
 };
 
 const handleDelete = (doctor) => {
-    const url = `http://127.0.0.1:8000/staff/${doctor.id}/destroy`;
+    const url = `http://127.0.0.1:8000/doctors/${doctor.id}/destroy`;
     axios({
       url,
       method: 'DELETE',
     }).then((response) => {
-      store.dispatch(doctorsActions.fetchStaffMembers());
+      store.dispatch(doctorsActions.fetchDoctors());
       notifications['success']({
         message: 'Staff Deleted Successfully',
       });

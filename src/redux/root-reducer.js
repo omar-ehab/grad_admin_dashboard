@@ -9,6 +9,7 @@ import students from '@iso/redux/students/reducer';
 import student from '@iso/redux/student/reducer';
 import staff from '@iso/redux/staff/reducer';
 import doctors from '@iso/redux/doctors/reducer';
+import labs from '@iso/redux/labs/reducer';
 
 export default combineReducers({
   Auth,
@@ -20,5 +21,6 @@ export default combineReducers({
   students,
   student,
   staff,
-  doctors
+  doctors,
+  labs
 });

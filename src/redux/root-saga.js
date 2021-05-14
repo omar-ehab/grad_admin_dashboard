@@ -6,6 +6,7 @@ import studentsSaga from '@iso/redux/students/saga';
 import studentSaga from '@iso/redux/student/saga';
 import staffSaga from '@iso/redux/staff/saga';
 import doctorsSaga from '@iso/redux/doctors/saga';
+import labsSaga from '@iso/redux/labs/saga';
 
 export default function* rootSaga(getState) {
   yield all([
@@ -15,6 +16,7 @@ export default function* rootSaga(getState) {
     studentsSaga(),
     studentSaga(),
     staffSaga(),
-    doctorsSaga()
+    doctorsSaga(),
+    labsSaga()
   ]);
 }

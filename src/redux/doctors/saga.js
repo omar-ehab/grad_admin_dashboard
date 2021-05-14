@@ -50,7 +50,7 @@ export function* storeDoctorRequest() {
       if(res.success === true) {
         yield put({
           type: actions.STORE_NEW_DOCTORS_SUCCESS,
-          payload: { staff: res.staff }
+          payload: { doctor: res.doctor }
         });
         yield put({
           type: actions.CLOSE_INSERT_DOCTORS_MODAL
@@ -84,11 +84,10 @@ export function* editDoctorRequest() {
       const doctor_id = doctors.selected_doctor_id;
       const res = yield SuperFetch.put(`doctors/${doctor_id}/update`, payload)
 
-
       if(res.success === true) {
         yield put({
           type: actions.EDIT_DOCTORS_SUCCESS,
-          payload: { staff: res.staff }
+          payload: { doctor: res.doctor }
         });
         yield put({
           type: actions.CLOSE_EDIT_DOCTORS_MODAL
