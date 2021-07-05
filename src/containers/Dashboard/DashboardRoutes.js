@@ -9,7 +9,7 @@ const routes = [
     component: lazy(() => import('@iso/containers/Students/AntTables/AntTables')),
   },
   {
-    path: 'students/:student_id',
+    path: 'students/:student_id/:id',
     component: lazy(() => import('@iso/containers/Student/Student')),
   },
   {

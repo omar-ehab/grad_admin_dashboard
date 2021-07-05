@@ -44,7 +44,7 @@ export function* storeMarketRequest() {
   yield takeEvery('STORE_NEW_MARKET_REQUEST', function*() {
     try {
       const { markets } = yield select();
-      const payload = markets.selected_market
+      const payload = {name: markets.selected_market.market_name}
       payload.createdBy = localStorage.getItem('admin_dashboard_id');
       const res = yield SuperFetch.post('markets', payload)
 
